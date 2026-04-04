@@ -21,6 +21,8 @@
       --shadow:0 18px 45px rgba(10,32,58,.12);
       --radius:22px;
       --max:1180px;
+      --success:#16803c;
+      --error:#b42318;
     }
 
     *{box-sizing:border-box}
@@ -210,6 +212,11 @@
       background:linear-gradient(135deg,var(--accent),var(--primary));
       box-shadow:0 16px 30px rgba(11,79,145,.28);
     }
+    .btn-primary:disabled{
+      opacity:.7;
+      cursor:not-allowed;
+      transform:none;
+    }
     .btn-whatsapp{
       color:#fff;
       background:#25D366;
@@ -392,6 +399,15 @@
       border-color:var(--accent);
       box-shadow:0 0 0 4px rgba(30,162,255,.12);
     }
+
+    .form-status{
+      margin-top:14px;
+      font-size:14px;
+      font-weight:600;
+      min-height:20px;
+    }
+    .form-status.success{ color:var(--success); }
+    .form-status.error{ color:var(--error); }
 
     .footer{
       background:#fff;
@@ -654,7 +670,8 @@
             <div class="form-row">
               <textarea name="message" placeholder="Mesaj"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Trimite cererea</button>
+            <button type="submit" class="btn btn-primary" id="submitBtn">Trimite cererea</button>
+            <div id="formStatus" class="form-status"></div>
           </form>
         </div>
       </div>
@@ -676,6 +693,8 @@
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
     const contactForm = document.getElementById("contactForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const formStatus = document.getElementById("formStatus");
 
     if (menuToggle && navLinks) {
       menuToggle.addEventListener("click", () => {
@@ -687,23 +706,36 @@
       });
     }
 
-    emailjs.init({
-      publicKey: "aHm-I1kYeAhK3rNo_"
-    });
+    emailjs.init("aHm-I1kYeAhK3rNo_");
 
     if (contactForm) {
-      contactForm.addEventListener("submit", function(e) {
+      contactForm.addEventListener("submit", async function(e) {
         e.preventDefault();
 
-        emailjs.sendForm("service_job5fdj", "template_qj5z1hk", this)
-          .then(() => {
-            alert("Mesaj trimis cu succes!");
-            contactForm.reset();
-          })
-          .catch((error) => {
-            console.error("Eroare:", error);
-            alert("A apărut o eroare la trimitere.");
-          });
+        formStatus.textContent = "";
+        formStatus.className = "form-status";
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Se trimite...";
+
+        try {
+          const response = await emailjs.sendForm(
+            "service_job5fdj",
+            "template_qj5z1hk",
+            contactForm
+          );
+
+          console.log("Succes EmailJS:", response);
+          formStatus.textContent = "Mesaj trimis cu succes!";
+          formStatus.classList.add("success");
+          contactForm.reset();
+        } catch (error) {
+          console.error("Eroare EmailJS:", error);
+          formStatus.textContent = "Eroare la trimitere: " + (error?.text || error?.message || "Verifică EmailJS.");
+          formStatus.classList.add("error");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Trimite cererea";
+        }
       });
     }
   </script>
