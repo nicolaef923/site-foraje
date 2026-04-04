@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nume Firmă | Foraje puțuri</title>
+  <meta name="description" content="Foraje puțuri de mică, medie și mare adâncime. Cerere ofertă, WhatsApp și contact rapid." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary:#0b4f91;
+      --primary-dark:#08345f;
+      --accent:#1ea2ff;
+      --text:#132131;
+      --muted:#667586;
+      --bg:#f4f7fb;
+      --white:#ffffff;
+      --line:#dce5ef;
+      --shadow:0 18px 45px rgba(10,32,58,.12);
+      --radius:22px;
+      --radius-sm:16px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+
+    .container{
+      width:min(100% - 32px, var(--max));
+      margin:0 auto;
+    }
+
+    .topbar{
+      background:#0d2036;
+      color:#fff;
+      padding:11px 0;
+      font-size:14px;
+    }
+    .topbar-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .topbar a{font-weight:700}
+
+    .header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(255,255,255,.94);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(220,229,239,.9);
+    }
+    .nav{
+      min-height:84px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+    .logo-mark{
+      width:48px;
+      height:48px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      color:#fff;
+      background:linear-gradient(135deg,var(--primary),var(--accent));
+      box-shadow:var(--shadow);
+      flex:0 0 auto;
+    }
+    .logo-text strong{
+      display:block;
+      font-family:Montserrat,sans-serif;
+      font-size:18px;
+      line-height:1.1;
+    }
+    .logo-text span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:3px;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:26px;
+    }
+    .nav-links a{
+      font-weight:600;
+      color:#23364b;
+      transition:.2s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a.active{
+      color:var(--primary);
+    }
+
+    .menu-toggle{
+      display:none;
+      background:transparent;
+      border:none;
+      cursor:pointer;
+      padding:0;
+    }
+    .menu-toggle span{
+      display:block;
+      width:24px;
+      height:2px;
+      background:#1f2d3a;
+      margin:5px 0;
+      border-radius:999px;
+    }
+
+    .hero{
+      position:relative;
+      min-height:88vh;
+      display:flex;
+      align-items:center;
+      padding:70px 0 50px;
+      background:
+        linear-gradient(rgba(8,26,45,.56), rgba(8,26,45,.62)),
+        url("images/hero.jpg") center/cover no-repeat;
+    }
+    .hero-content{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:28px;
+      align-items:center;
+      position:relative;
+      z-index:2;
+    }
+    .hero-text{
+      color:#fff;
+    }
+    .eyebrow{
+      display:inline-block;
+      margin-bottom:16px;
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-weight:700;
+      opacity:.95;
+    }
+    .hero h1{
+      margin:0 0 14px;
+      font-family:Montserrat,sans-serif;
+      font-size:clamp(40px,5.2vw,66px);
+      line-height:1.03;
+    }
+    .hero h2{
+      margin:0 0 28px;
+      font-size:clamp(19px,2vw,28px);
+      font-weight:500;
+      line-height:1.5;
+      max-width:720px;
+    }
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .hero-card{
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:0 28px 60px rgba(7,25,44,.24);
+      min-height:470px;
+      backdrop-filter:blur(8px);
+    }
+    .hero-card img{
+      width:100%;
+      height:100%;
+      min-height:470px;
+      object-fit:cover;
+    }
+
+    .btn{
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      padding:14px 22px;
+      border-radius:999px;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+      transition:.25s ease;
+      text-align:center;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg,var(--accent),var(--primary));
+      box-shadow:0 16px 30px rgba(11,79,145,.28);
+    }
+    .btn-whatsapp{
+      color:#fff;
+      background:#25D366;
+      box-shadow:0 16px 30px rgba(37,211,102,.25);
+    }
+    .btn-outline{
+      color:#fff;
+      border:1px solid rgba(255,255,255,.35);
+      background:rgba(255,255,255,.08);
+    }
+
+    .section{
+      padding:82px 0;
+    }
+    .section-light{
+      background:#eef4fb;
+    }
+    .section-head{
+      max-width:800px;
+      margin:0 auto 36px;
+      text-align:center;
+    }
+    .section-head h2{
+      margin:0 0 14px;
+      font-family:Montserrat,sans-serif;
+      font-size:clamp(31px,4vw,46px);
+      line-height:1.08;
+    }
+    .section-head p{
+      margin:0;
+      font-size:17px;
+      line-height:1.8;
+      color:var(--muted);
+    }
+
+    .features{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+    .feature-card,
+    .county-card,
+    .contact-card,
+    .contact-form,
+    .service-box{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .feature-card{
+      padding:28px;
+    }
+    .feature-icon{
+      width:56px;
+      height:56px;
+      display:grid;
+      place-items:center;
+      border-radius:18px;
+      background:linear-gradient(135deg,rgba(11,79,145,.12),rgba(30,162,255,.12));
+      color:var(--primary);
+      font-weight:800;
+      font-size:20px;
+      margin-bottom:16px;
+    }
+    .feature-card h3{
+      margin:0 0 10px;
+      font-family:Montserrat,sans-serif;
+      font-size:23px;
+    }
+    .feature-card p{
+      margin:0;
+      line-height:1.8;
+      color:var(--muted);
+    }
+
+    .services-wrap{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:18px;
+    }
+    .service-box{
+      padding:28px;
+    }
+    .service-box ul{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px 16px;
+    }
+    .service-box li{
+      padding:17px 18px;
+      border-radius:18px;
+      background:#f8fbff;
+      border:1px solid #e2ebf4;
+      font-weight:500;
+      line-height:1.6;
+    }
+
+    .cta-box{
+      margin-top:26px;
+      background:linear-gradient(135deg,var(--primary-dark),var(--primary));
+      color:#fff;
+      border-radius:30px;
+      padding:36px 26px;
+      text-align:center;
+      box-shadow:0 24px 52px rgba(8,52,95,.24);
+    }
+    .cta-box h3{
+      margin:0 0 10px;
+      font-family:Montserrat,sans-serif;
+      font-size:32px;
+    }
+    .cta-box .phone{
+      display:block;
+      margin:0 0 10px;
+      font-size:24px;
+      font-weight:800;
+    }
+    .cta-box .small{
+      display:block;
+      margin:0 0 18px;
+      opacity:.9;
+    }
+
+    .counties-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:20px;
+    }
+    .county-card{
+      overflow:hidden;
+      text-align:center;
+    }
+    .county-card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+    }
+    .county-card h3{
+      margin:0;
+      padding:18px 14px 6px;
+      font-family:Montserrat,sans-serif;
+      font-size:21px;
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:20px;
+    }
+    .contact-card{
+      padding:28px;
+    }
+    .contact-card h3{
+      margin-top:0;
+      font-family:Montserrat,sans-serif;
+      font-size:26px;
+    }
+    .contact-card p{
+      margin:0 0 14px;
+      line-height:1.8;
+    }
+
+    .contact-form{
+      padding:28px;
+    }
+    .form-row{
+      margin-bottom:14px;
+    }
+    .contact-form input,
+    .contact-form textarea{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:15px 16px;
+      font:inherit;
+      outline:none;
+      background:#fff;
+      transition:.2s ease;
+    }
+    .contact-form textarea{
+      min-height:150px;
+      resize:vertical;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus{
+      border-color:var(--accent);
+      box-shadow:0 0 0 4px rgba(30,162,255,.12);
+    }
+
+    .footer{
+      background:#fff;
+      border-top:1px solid var(--line);
+      padding:28px 0 50px;
+    }
+    .footer-inner{
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .floating-whatsapp{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:1200;
+      background:#25D366;
+      color:#fff;
+      padding:15px 19px;
+      border-radius:999px;
+      font-weight:700;
+      box-shadow:0 16px 34px rgba(37,211,102,.28);
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(24px);
+      transition:opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible{
+      opacity:1;
+      transform:none;
+    }
+
+    @media (max-width: 1080px){
+      .hero-content,
+      .features,
+      .counties-grid,
+      .contact-grid{
+        grid-template-columns:1fr 1fr;
+      }
+      .service-box ul{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width: 860px){
+      .menu-toggle{display:block}
+      .nav{
+        position:relative;
+      }
+      .nav-links{
+        display:none;
+        position:absolute;
+        top:84px;
+        left:0;
+        right:0;
+        flex-direction:column;
+        align-items:flex-start;
+        padding:18px;
+        background:#fff;
+        border:1px solid var(--line);
+        border-radius:20px;
+        box-shadow:var(--shadow);
+      }
+      .nav-links.open{display:flex}
+
+      .hero-content,
+      .features,
+      .counties-grid,
+      .contact-grid,
+      .service-box ul{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 560px){
+      .hero{
+        min-height:auto;
+        padding:54px 0 42px;
+      }
+      .hero h1{font-size:38px}
+      .hero-actions{
+        flex-direction:column;
+      }
+      .btn{
+        width:100%;
+      }
+      .cta-box h3{
+        font-size:28px;
+      }
+      .cta-box .phone{
+        font-size:21px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div>Telefon: <a href="tel:+40734050860">+40 734 050 860</a></div>
+      <a href="#contact">Cerere ofertă</a>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container nav">
+      <a href="#home" class="logo">
+        <div class="logo-mark">F</div>
+        <div class="logo-text">
+          <strong>Nume Firmă</strong>
+          <span>Foraje Puțuri</span>
+        </div>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Deschide meniul">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" class="active">Home</a>
+        <a href="#despre">Despre Noi</a>
+        <a href="#servicii">Servicii</a>
+        <a href="#judete">Unde Lucrăm?</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <div class="hero-text reveal">
+          <span class="eyebrow">Foraje profesionale • Intervenții rapide</span>
+          <h1>Foraje puțuri de mică,<br>medie și mare adâncime</h1>
+          <h2>Indiferent care sunt cerințele tale noi le îndeplinim!</h2>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Cerere ofertă</a>
+            <a href="https://wa.me/40734050860?text=Bun%C4%83%20ziua!%20Doresc%20detalii%20despre%20foraje." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="hero-card reveal">
+          <img src="images/hero.jpg" alt="Lucrare de foraj">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="despre">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>De ce Nume Firmă Foraje Puțuri?</h2>
+          <p>
+            Ne mândrim că suntem profesioniști, de încredere și oferim constant servicii de calitate clienților noștri.
+            Prioritatea noastră este să ne asigurăm că aveți o calitate excelentă a apei.
+          </p>
+        </div>
+
+        <div class="features">
+          <article class="feature-card reveal">
+            <div class="feature-icon">✓</div>
+            <h3>Seriozitate</h3>
+            <p>Echipa noastră de specialiști vă asigură toate operațiile și materialele necesare în execuția forajelor.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">★</div>
+            <h3>Calitate</h3>
+            <p>Ne adaptăm la cerințele dvs și vă asigurăm cele mai bune materiale.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">⏱</div>
+            <h3>Punctualitate</h3>
+            <p>Garantăm că lucrările sunt realizate în cel mai eficient și sigur mod ținându-ne de promisiunea făcută.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light" id="servicii">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Serviciile noastre</h2>
+          <p>
+            Oferim servicii complete de forare a puțurilor și lucrări de mentenanță.
+            Experiența în domeniu ne permite să vă oferim cele mai avantajoase prețuri și cea mai ridicată calitate.
+          </p>
+        </div>
+
+        <div class="services-wrap">
+          <div class="service-box reveal">
+            <ul>
+              <li>Foraje puțuri apă de mică adâncime de la 1-30 m</li>
+              <li>Foraje puțuri apă de medie adâncime de la 1-80 m cu izolarea pânzelor de suprafață</li>
+              <li>Foraje puțuri apă de mare adâncime de la 1-250 m</li>
+              <li>Foraje piloți diverse diametre și adâncimi</li>
+              <li>Foraje de epuisment</li>
+              <li>Foraje pentru pompe de căldură</li>
+              <li>Foraje puțuri pentru studii și observație</li>
+              <li>Foraje pentru prize anodice</li>
+              <li>Denisipări / decolmatări</li>
+              <li>Reparații și întreținere foraje</li>
+              <li>Conservare și casare foraje</li>
+              <li>Cabine puț pvc sau beton</li>
+              <li>Automatizări cu sisteme hidrofor sau tampon</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cta-box reveal">
+          <h3>Vă stăm la dispoziție pentru detalii</h3>
+          <span class="phone"><a href="tel:+40734050860">+40 734 050 860</a></span>
+          <span class="small">sau</span>
+          <a href="https://wa.me/40734050860?text=Bun%C4%83%20ziua!%20Doresc%20o%20ofert%C4%83." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">Contactați-ne pe WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="judete">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Executăm lucrări în Județele</h2>
+        </div>
+
+        <div class="counties-grid">
+          <article class="county-card reveal">
+            <img src="images/judet1.jpg" alt="București-Ilfov">
+            <h3>București-Ilfov</h3>
+          </article>
+
+          <article class="county-card reveal">
+            <img src="images/judet2.jpg" alt="Giurgiu">
+            <h3>Giurgiu</h3>
+          </article>
+
+          <article class="county-card reveal">
+            <img src="images/judet3.jpg" alt="Călărași">
+            <h3>Călărași</h3>
+          </article>
+
+          <article class="county-card reveal">
+            <img src="images/judet4.jpg" alt="Brăila">
+            <h3>Brăila</h3>
+          </article>
+
+          <article class="county-card reveal">
+            <img src="images/judet5.jpg" alt="Brașov">
+            <h3>Brașov</h3>
+          </article>
+
+          <article class="county-card reveal">
+            <img src="images/judet6.jpg" alt="Telorman">
+            <h3>Telorman</h3>
+          </article>
+
+          <article class="county-card reveal">
+            <img src="images/judet7.jpg" alt="Ialomița">
+            <h3>Ialomița</h3>
+          </article>
+
+          <article class="county-card reveal">
+            <img src="images/judet8.jpg" alt="Dâmbovița">
+            <h3>Dâmbovița</h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light" id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Cerere Ofertă</h2>
+          <p>Te vom contacta în cel mai scurt timp posibil</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card reveal">
+            <h3>Date de contact</h3>
+            <p><strong>Telefon:</strong> <a href="tel:+40734050860">+40 734 050 860</a></p>
+            <p><strong>Email:</strong> <a href="mailto:contact@numelefirmei.ro">contact@numelefirmei.ro</a></p>
+            <p><strong>WhatsApp:</strong> <a href="https://wa.me/40734050860" target="_blank" rel="noopener noreferrer">Deschide conversația</a></p>
+          </div>
+
+          <form class="contact-form reveal" id="contactForm">
+            <div class="form-row">
+              <input type="text" id="name" placeholder="Nume" required>
+            </div>
+            <div class="form-row">
+              <input type="email" id="email" placeholder="Email">
+            </div>
+            <div class="form-row">
+              <input type="tel" id="phone" placeholder="Telefon" required>
+            </div>
+            <div class="form-row">
+              <textarea id="message" placeholder="Mesaj"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Trimite cererea</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      © 2022 numelefirmei.ro - Website creat & găzduit de WebSitesDesign
+    </div>
+  </footer>
+
+  <a class="floating-whatsapp" href="https://wa.me/40734050860?text=Bun%C4%83%20ziua!%20Doresc%20mai%20multe%20detalii." target="_blank" rel="noopener noreferrer">
+    WhatsApp
+  </a>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    const yearLinks = document.querySelectorAll(".nav-links a");
+    const sections = document.querySelectorAll("main section[id]");
+    const contactForm = document.getElementById("contactForm");
+
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("open");
+      });
+
+      navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => navLinks.classList.remove("open"));
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    function setActiveLink() {
+      const scrollPos = window.scrollY + 140;
+      sections.forEach(section => {
+        const id = section.getAttribute("id");
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const targetLink = document.querySelector('.nav-links a[href="#' + id + '"]');
+        if (!targetLink) return;
+
+        if (scrollPos >= top && scrollPos < top + height) {
+          yearLinks.forEach(link => link.classList.remove("active"));
+          targetLink.classList.add("active");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", setActiveLink);
+    setActiveLink();
+
+    if (contactForm) {
+      contactForm.addEventListener("submit", function(e){
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        const subject = encodeURIComponent("Cerere ofertă");
+        const body = encodeURIComponent(
+`Bună ziua,
+
+Am completat formularul de pe site.
+
+Nume: ${name}
+Email: ${email || "-"}
+Telefon: ${phone}
+Mesaj: ${message || "-"}
+
+Vă rog să mă contactați în cel mai scurt timp posibil.`
+        );
+
+        window.location.href = `mailto:contact@numelefirmei.ro?subject=${subject}&body=${body}`;
+      });
+    }
+  </script>
+</body>
+</html>
